@@ -115,22 +115,9 @@ section{padding:36px 0}
 
 .today{display:none;font:900 clamp(24px,7vw,54px)/1.1 Impact,sans-serif;color:var(--gold);text-shadow:0 0 14px #ffb300;padding:18px 0;text-transform:uppercase;animation:blink .8s steps(2) infinite}
 
-/* ---------- timeline / road ---------- */
+/* ---------- timeline ---------- */
 h2.h{font:900 clamp(26px,6vw,44px) Impact,"Arial Black",sans-serif;text-transform:uppercase;text-align:center;letter-spacing:2px;text-shadow:3px 3px 0 var(--red-d);margin-bottom:6px}
 .h-sub{text-align:center;font-weight:700;margin-bottom:26px;color:#cfe}
-.road{position:relative;height:96px;margin:50px 6px 8px}
-.road .asphalt{position:absolute;left:0;right:0;bottom:6px;height:26px;border-radius:14px;background:#222;border:3px solid #000;
-  box-shadow:0 4px 0 #000;overflow:hidden}
-.road .asphalt:before{content:"";position:absolute;left:0;right:0;top:9px;height:4px;
-  background:repeating-linear-gradient(90deg,#fff 0 22px,transparent 22px 44px)}
-.road .done{position:absolute;left:0;bottom:6px;height:26px;border-radius:14px;background:linear-gradient(90deg,var(--green),var(--green-l));
-  border:3px solid #000;width:0;transition:width 1.4s cubic-bezier(.3,1,.4,1);z-index:1;opacity:.85}
-.car{position:absolute;bottom:20px;left:0;font-size:44px;z-index:3;transform:translateX(-50%);transition:left 1.4s cubic-bezier(.3,1,.4,1);
-  filter:drop-shadow(0 4px 2px rgba(0,0,0,.6));animation:bump .5s infinite alternate}
-@keyframes bump{from{margin-bottom:0}to{margin-bottom:3px}}
-.pa{position:absolute;right:-6px;bottom:30px;font-size:13px;font-weight:900;background:var(--gold);color:#000;border:3px solid #000;border-radius:8px;padding:4px 8px;z-index:4;text-transform:uppercase;box-shadow:3px 3px 0 #000}
-.start{position:absolute;left:-6px;bottom:30px;font-size:13px;font-weight:900;background:#fff;color:#000;border:3px solid #000;border-radius:8px;padding:4px 8px;z-index:4;text-transform:uppercase;box-shadow:3px 3px 0 #000}
-.pct{text-align:center;font:900 20px "Courier New",monospace;color:var(--gold);margin-bottom:28px;text-shadow:2px 2px 0 #000}
 
 .steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
 .step{
@@ -193,7 +180,7 @@ footer b{color:var(--gold)}
 
 <nav>
   <a class="btn" href="#top">Countdown</a>
-  <a class="btn g" href="#road">Road Trip</a>
+  <a class="btn g" href="#timeline">Timeline</a>
   <a class="btn" href="#about">About</a>
 </nav>
 
@@ -231,17 +218,9 @@ footer b{color:var(--gold)}
     <p class="question">&#127876; On December 23rd, ask yourself: <b>What Would Uncle Ray Do?</b></p>
   </section>
 
-  <section id="road">
-    <h2 class="h">The Road to Dec 23</h2>
-    <p class="h-sub">Uncle Ray is on his way. Follow the journey!</p>
-    <div class="road" aria-hidden="true">
-      <div class="start" id="startLbl">Dec 23</div>
-      <div class="pa">Dec 23 &#127876;</div>
-      <div class="asphalt"></div>
-      <div class="done" id="done"></div>
-      <div class="car" id="car">&#128663;</div>
-    </div>
-    <p class="pct" id="pct">0% there</p>
+  <section id="timeline">
+    <h2 class="h">Timeline</h2>
+    <p class="h-sub">How a single act of kindness became a holiday.</p>
 
     <div class="steps">
       <div class="step"><span class="ico">&#10052;&#65039;</span><span class="when">Dec 23, 2021</span><h3>The Original Great Day</h3><p>Ray Kauffman braves winter weather and holiday traffic to pick up a friend in need.</p></div>
@@ -283,7 +262,7 @@ footer b{color:var(--gold)}
     var y=now.getFullYear();
     var start=new Date(y,11,23), end=new Date(y,11,24);
     if(now>=end){y++;start=new Date(y,11,23);end=new Date(y,11,24)}
-    var prev=new Date(y-1,11,24); // road starts after last Dec 23 ends
+    var prev=new Date(y-1,11,24);
     return {y:y,start:start,end:end,prev:prev};
   }
   var alarm=$('alarm');
@@ -297,7 +276,7 @@ footer b{color:var(--gold)}
       $('goal').textContent='★ A Great Day in Central PA ★';
       alarm.classList.add('ring');
       $('nextTxt').textContent="It's here! Go be kind. Give someone a ride.";
-      progress(1);return;
+      return;
     }
     $('digits').style.display='flex';$('today').style.display='none';
     var s=Math.floor(diff/1000);
@@ -305,25 +284,8 @@ footer b{color:var(--gold)}
     var h=Math.floor(s/3600);s-=h*3600;
     var m=Math.floor(s/60);s-=m*60;
     $('d').textContent=pad(d,3);$('h').textContent=pad(h,2);$('m').textContent=pad(m,2);$('s').textContent=pad(s,2);
-    progress((now-t.prev)/(t.start-t.prev));
-  }
-  var shown=false;
-  function progress(p){
-    p=Math.max(0,Math.min(1,p));
-    var pc=(p*100);
-    $('car').style.left=(shown?pc:0)+'%';$('done').style.width=(shown?pc:0)+'%';
-    $('pct').textContent=Math.floor(pc)+'% of the way to Uncle Ray Day';
-    window._p=pc;
   }
   tick();setInterval(tick,1000);
-  // animate the car once road scrolls into view
-  var road=$('road');
-  function reveal(){
-    if(shown)return;
-    var r=road.getBoundingClientRect();
-    if(r.top<innerHeight*.85){shown=true;tick()}
-  }
-  addEventListener('scroll',reveal,{passive:true});setTimeout(reveal,300);
   // wiggle bells briefly each minute for fun
   setInterval(function(){if($('today').style.display==='block')return;alarm.classList.add('ring');setTimeout(function(){alarm.classList.remove('ring')},900)},60000);
   alarm.addEventListener('click',function(){alarm.classList.add('ring');setTimeout(function(){if($('today').style.display!=='block')alarm.classList.remove('ring')},1200)});
