@@ -63,47 +63,65 @@ section{padding:36px 0}
 }
 @keyframes pop{from{transform:scale(0) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
 
-/* ---------- alarm clock (1996 pixel style) ---------- */
+/* ---------- 90s plastic digital alarm clock ---------- */
 .clockwrap{display:flex;justify-content:center;margin-top:34px}
-.alarm{position:relative;width:min(560px,100%);padding-top:84px}
-.bellsvg{position:absolute;top:22px;width:22%;height:auto;shape-rendering:crispEdges;z-index:1}
-.bellsvg.l{left:8%;transform-origin:100% 100%;transform:rotate(-20deg)}
-.bellsvg.r{right:8%;transform-origin:0 100%;transform:rotate(20deg)}
-.alarm.ring .bellsvg.l{animation:ringL .15s steps(2) infinite}
-.alarm.ring .bellsvg.r{animation:ringR .15s steps(2) infinite}
-.alarm.ring .body{animation:shake .15s steps(2) infinite}
-@keyframes ringL{from{transform:rotate(-28deg)}to{transform:rotate(-14deg)}}
-@keyframes ringR{from{transform:rotate(28deg)}to{transform:rotate(14deg)}}
-@keyframes shake{from{transform:translateX(-4px)}to{transform:translateX(4px)}}
-.hammer{position:absolute;top:10px;left:50%;width:12px;height:64px;margin-left:-6px;background:#c0c0c0;border:4px solid #000;border-width:0 4px;z-index:1}
-.hammer:before{content:"";position:absolute;top:-4px;left:-12px;width:28px;height:16px;background:#c0c0c0;border:4px solid #000}
-.alarm.ring .hammer{animation:ham .15s steps(2) infinite;transform-origin:50% 100%}
-@keyframes ham{from{transform:rotate(-24deg)}to{transform:rotate(24deg)}}
-.body{
-  position:relative;z-index:2;padding:22px 18px 22px;background:#ff0000;border:6px solid #000;
-  box-shadow:inset 6px 6px 0 #ff8080,inset -6px -6px 0 #900000,10px 10px 0 #000;
+.alarm{position:relative;width:min(640px,100%);filter:drop-shadow(0 18px 14px rgba(0,0,0,.55))}
+.deck{
+  margin:0 7%;padding:16px 4% 14px;border-radius:26px 26px 0 0;position:relative;
+  background:linear-gradient(#2fc45a,#14903a);border:3px solid #0a5a22;border-bottom:0;
+  box-shadow:inset 0 3px 0 rgba(255,255,255,.45);
+  font:700 clamp(9px,2.1vw,13px) "Comic Sans MS","Chalkboard SE","Segoe Print",cursive;color:#fff;text-shadow:1px 1px 0 #064d1b;
 }
-.ringgreen{padding:8px;border:4px solid #000;
-  background:#00a000 conic-gradient(#008000 25%,#00b000 0 50%,#008000 0 75%,#00b000 0) 0 0/4px 4px;
-  box-shadow:inset 4px 4px 0 #80ff80,inset -4px -4px 0 #004000}
-.screen{padding:14px 8px 12px;text-align:center;background:#000;border:4px solid;border-color:#404040 #fff #fff #404040}
-.label-top{font:700 clamp(10px,2.6vw,14px) "Courier New",monospace;letter-spacing:2px;color:#00ff00;text-transform:uppercase}
-.digits{display:flex;justify-content:center;align-items:flex-start;gap:clamp(4px,1.8vw,12px);margin:10px 0 4px}
+.deck .row{display:flex;align-items:flex-end;gap:2%;margin-bottom:12px}
+.deck .row:last-child{margin-bottom:0}
+.key{display:flex;flex-direction:column;align-items:center;gap:5px;text-transform:uppercase;letter-spacing:.5px}
+.rbtn{width:clamp(18px,4.4vw,28px);height:clamp(12px,2.8vw,18px);border-radius:50%/60%;background:radial-gradient(ellipse at 40% 30%,#ff6a5a,#e0151d 60%,#8e0a12);border:2px solid #5a0509;cursor:pointer;box-shadow:0 2px 0 #052e10}
+.rbtn:active{transform:translateY(2px);box-shadow:none}
+.slot{flex:1;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.slot .tag{display:flex;gap:10px;width:100%;justify-content:space-between}
+.rail{position:relative;height:clamp(18px,4vw,26px);background:#0b5a22;border-radius:14px;border:2px solid #06401a;box-shadow:inset 0 3px 4px rgba(0,0,0,.5);width:100%}
+.knob{position:absolute;top:-2px;height:calc(100% + 4px);width:46%;border-radius:10px;background:
+  repeating-linear-gradient(90deg,transparent 0 5px,rgba(0,0,0,.25) 5px 7px) 62% 50%/38% 60% no-repeat,
+  linear-gradient(#ff7060,#e0151d 50%,#a00d14);border:2px solid #5a0509;box-shadow:0 2px 0 #052e10;transition:left .15s;cursor:pointer}
+.knob.lo{left:2%}.knob.hi{left:52%}
+.snooze{flex:0 0 54%}
+.snooze .bar{height:clamp(18px,4vw,26px);border-radius:12px;background:linear-gradient(#ff7060,#e0151d 50%,#a00d14);border:2px solid #5a0509;box-shadow:0 3px 0 #052e10;cursor:pointer;margin-bottom:4px}
+.snooze .bar:active{transform:translateY(3px);box-shadow:none}
+.snooze span{margin-left:12%;text-transform:uppercase}
+.shell{
+  position:relative;border-radius:44px;padding:clamp(10px,2.4vw,18px);border:3px solid #0a5a22;
+  background:linear-gradient(#35d062 0,#17a043 12%,#128a37 70%,#0c6a28);
+  box-shadow:inset 0 4px 0 rgba(255,255,255,.5),inset 0 -8px 0 rgba(0,0,0,.22);
+}
+.face{display:grid;grid-template-columns:minmax(0,15%) minmax(0,1fr) minmax(0,15%);align-items:stretch;border-radius:30px;border:3px solid #7a0710;
+  background:linear-gradient(#f0343c,#d3101f 60%,#b30d1a);box-shadow:inset 0 3px 0 rgba(255,255,255,.35);padding:clamp(8px,2vw,14px) clamp(6px,1.6vw,12px)}
+.side{position:relative;font:700 clamp(10px,2.4vw,15px) "Comic Sans MS","Chalkboard SE","Segoe Print",cursive;color:#ffe27a;display:flex;flex-direction:column;justify-content:space-between;align-items:center;text-transform:uppercase}
+.dots{display:flex;gap:clamp(4px,1.4vw,10px);align-items:center}
+.dots.v{flex-direction:column}
+.dots i{width:clamp(5px,1.2vw,8px);height:clamp(5px,1.2vw,8px);border-radius:50%;border:2px solid #fff;background:#7a0710;display:block}
+.alarm.ring .dots i{animation:blink .3s steps(2) infinite}
+.alarm.ring .shell,.alarm.ring .deck{animation:shake .12s steps(2) infinite}
+@keyframes shake{from{transform:translateX(-3px)}to{transform:translateX(3px)}}
+.brand{font-size:clamp(9px,2.2vw,14px);color:#fff;letter-spacing:1px}
+.lens{
+  border-radius:8px;border:clamp(5px,1.4vw,9px) solid #ffd54a;background:linear-gradient(#4a0710,#2a0309);position:relative;
+  box-shadow:inset 0 0 18px #000,inset 0 3px 0 #b8860b,0 3px 0 #a67c00;padding:clamp(8px,2vw,16px) clamp(4px,1.4vw,12px) 8px;text-align:center;min-width:0;
+}
+.lens:after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.12) 0,rgba(255,255,255,0) 40%);pointer-events:none}
+.digits{display:flex;justify-content:center;align-items:flex-start;gap:clamp(2px,1vw,8px)}
 .unit{text-align:center;min-width:0}
-.num{display:flex;gap:clamp(2px,.8vw,5px);justify-content:center}
-.num canvas,.colon canvas{height:clamp(20px,7.4vw,44px);width:auto;aspect-ratio:20/28;image-rendering:pixelated;display:block;background:#000}
-.colon{padding-top:0;animation:blink 1s steps(2) infinite}
-.colon canvas{height:clamp(20px,7.4vw,44px)}
-@keyframes blink{50%{opacity:.2}}
-.cap{font:700 clamp(9px,2.4vw,13px) "Courier New",monospace;color:#ffff00;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
-.goal{margin-top:10px;font:700 clamp(11px,2.9vw,16px) "Courier New",monospace;color:#fff;letter-spacing:1px}
-.knobs{display:flex;justify-content:space-between;padding:0 12%;margin-top:16px}
-.knob{width:46px;height:18px;background:#ffff00;border:4px solid #000;box-shadow:inset 3px 3px 0 #fff,inset -3px -3px 0 #a08000}
-.feet{display:flex;justify-content:space-between;padding:0 12%;position:relative;z-index:1;margin-top:10px}
-.feet i{width:44px;height:30px;background:#000;clip-path:polygon(0 0,100% 0,80% 40%,80% 70%,100% 100%,60% 100%,40% 60%,20% 100%,0 100%,20% 70%,20% 40%)}
-.feet i:first-child{transform:translateX(-4px)}.feet i:last-child{transform:translateX(4px)}
+.num{display:flex;gap:clamp(1px,.5vw,4px);justify-content:center}
+.num canvas,.colon canvas{height:clamp(24px,6vw,40px);width:auto;aspect-ratio:60/100;display:block;transform:skewX(-6deg)}
+.colon{animation:blink 1s steps(2) infinite}
+.colon canvas{aspect-ratio:30/100}
+@keyframes blink{50%{opacity:.25}}
+.cap{font:700 clamp(8px,2vw,12px) "Comic Sans MS","Chalkboard SE",cursive;color:#ff7d92;letter-spacing:1px;text-transform:uppercase;margin-top:5px}
+.goal{margin-top:8px;font:700 clamp(10px,2.4vw,14px) "Comic Sans MS","Chalkboard SE",cursive;color:#ffd54a;letter-spacing:.5px}
+@media(max-width:560px){.face{display:block;padding:8px}.side{display:none}.num canvas,.colon canvas{height:8vw}}
 
 .today{display:none;font:900 clamp(24px,7vw,54px)/1.1 Impact,sans-serif;color:var(--gold);text-shadow:0 0 14px #ffb300;padding:18px 0;text-transform:uppercase;animation:blink .8s steps(2) infinite}
+
+.lens .today{font-size:clamp(20px,6vw,40px);color:#ff3355;text-shadow:0 0 12px #f03;padding:10px 0}
 
 /* ---------- timeline ---------- */
 h2.h{font:900 clamp(26px,6vw,44px) Impact,"Arial Black",sans-serif;text-transform:uppercase;text-align:center;letter-spacing:2px;text-shadow:3px 3px 0 var(--red-d);margin-bottom:6px}
@@ -181,27 +199,36 @@ footer b{color:var(--gold)}
 
     <div class="clockwrap">
       <div class="alarm" id="alarm" role="timer" aria-live="off">
-        <svg class="bellsvg l" viewBox="0 0 20 12" aria-hidden="true"><polygon points="6,0 14,0 14,2 17,2 17,4 19,4 19,11 1,11 1,4 3,4 3,2 6,2" fill="#000"/><polygon points="7,1 13,1 13,3 16,3 16,5 18,5 18,10 2,10 2,5 4,5 4,3 7,3" fill="#ffff00"/><rect x="4" y="5" width="2" height="3" fill="#fff"/><rect x="12" y="6" width="5" height="4" fill="#c09000"/></svg><svg class="bellsvg r" viewBox="0 0 20 12" aria-hidden="true"><polygon points="6,0 14,0 14,2 17,2 17,4 19,4 19,11 1,11 1,4 3,4 3,2 6,2" fill="#000"/><polygon points="7,1 13,1 13,3 16,3 16,5 18,5 18,10 2,10 2,5 4,5 4,3 7,3" fill="#ffff00"/><rect x="4" y="5" width="2" height="3" fill="#fff"/><rect x="12" y="6" width="5" height="4" fill="#c09000"/></svg><div class="hammer"></div>
-        <div class="body">
-          <div class="ringgreen">
-            <div class="screen">
-              <div class="label-top">&#9200; Time until Uncle Ray Day</div>
-              <div class="digits" id="digits">
-                <div class="unit"><div class="num" id="d"></div><div class="cap">Days</div></div>
-                <div class="colon"></div>
-                <div class="unit"><div class="num" id="h"></div><div class="cap">Hours</div></div>
-                <div class="colon"></div>
-                <div class="unit"><div class="num" id="m"></div><div class="cap">Mins</div></div>
-                <div class="colon"></div>
-                <div class="unit"><div class="num" id="s"></div><div class="cap">Secs</div></div>
-              </div>
-              <div class="today" id="today">It's Uncle Ray Day!</div>
-              <div class="goal" id="goal">&#9658; Alarm set: Dec 23</div>
-            </div>
+        <div class="deck">
+          <div class="row">
+            <div class="key"><i class="rbtn"></i>Hour</div>
+            <div class="key"><i class="rbtn"></i>Minute</div>
+            <div class="key"><i class="rbtn"></i>Time</div>
+            <div class="key"><i class="rbtn"></i>Alarm</div>
+            <div class="slot"><div class="tag"><span>Off &bull; &bull; On</span><span>Alarm</span></div><div class="rail" id="railA"><i class="knob lo" id="knobA"></i></div></div>
           </div>
-          <div class="knobs"><div class="knob"></div><div class="knob"></div></div>
+          <div class="row">
+            <div class="snooze"><div class="bar" id="snooze"></div><span>Snooze</span></div>
+            <div class="slot"><div class="tag"><span>Lo &bull; &bull; Hi</span><span>Alarm</span></div><div class="rail"><i class="knob hi" id="knobB"></i></div></div>
+          </div>
         </div>
-        <div class="feet"><i></i><i></i></div>
+        <div class="shell"><div class="face">
+          <div class="side l"><div class="dots"><i></i><i></i><i></i><i></i><i></i></div><div class="brand">Uncle Ray</div></div>
+          <div class="lens">
+            <div class="digits" id="digits">
+              <div class="unit"><div class="num" id="d"></div><div class="cap">Days</div></div>
+              <div class="colon"></div>
+              <div class="unit"><div class="num" id="h"></div><div class="cap">Hours</div></div>
+              <div class="colon"></div>
+              <div class="unit"><div class="num" id="m"></div><div class="cap">Mins</div></div>
+              <div class="colon"></div>
+              <div class="unit"><div class="num" id="s"></div><div class="cap">Secs</div></div>
+            </div>
+            <div class="today" id="today">It's Uncle Ray Day!</div>
+            <div class="goal" id="goal">&#9658; Alarm set: Dec 23</div>
+          </div>
+          <div class="side r"><div class="dots v"><i></i><i></i><i></i><i></i></div><div>Alarm</div></div>
+        </div></div>
       </div>
     </div>
 
@@ -255,17 +282,27 @@ footer b{color:var(--gold)}
     var prev=new Date(y-1,11,24);
     return {y:y,start:start,end:end,prev:prev};
   }
-  // pixel dot-matrix digits
-  var FONT={'0':'01110 10001 10011 10101 11001 10001 01110','1':'00100 01100 00100 00100 00100 00100 01110','2':'01110 10001 00001 00110 01000 10000 11111','3':'11110 00001 00001 01110 00001 00001 11110','4':'00010 00110 01010 10010 11111 00010 00010','5':'11111 10000 11110 00001 00001 10001 01110','6':'00110 01000 10000 11110 10001 10001 01110','7':'11111 00001 00010 00100 01000 01000 01000','8':'01110 10001 10001 01110 10001 10001 01110','9':'01110 10001 10001 01111 00001 00010 01100',':':'00000 00000 00100 00000 00100 00000 00000'};
+  // 7-segment LED digits
+  var SEG={'0':'abcdef','1':'bc','2':'abdeg','3':'abcdg','4':'bcfg','5':'acdfg','6':'acdefg','7':'abc','8':'abcdefg','9':'abcdfg'};
+  function hexH(g,x0,x1,y){var t=5;g.moveTo(x0,y);g.lineTo(x0+t,y-t);g.lineTo(x1-t,y-t);g.lineTo(x1,y);g.lineTo(x1-t,y+t);g.lineTo(x0+t,y+t);g.closePath()}
+  function hexV(g,x,y0,y1){var t=5;g.moveTo(x,y0);g.lineTo(x+t,y0+t);g.lineTo(x+t,y1-t);g.lineTo(x,y1);g.lineTo(x-t,y1-t);g.lineTo(x-t,y0+t);g.closePath()}
+  var SHAPES={a:function(g){hexH(g,10,50,6)},g:function(g){hexH(g,10,50,50)},d:function(g){hexH(g,10,50,94)},
+    f:function(g){hexV(g,6,10,46)},b:function(g){hexV(g,54,10,46)},e:function(g){hexV(g,6,54,90)},c:function(g){hexV(g,54,54,90)}};
   function glyph(cv,ch){
-    var g=cv.getContext('2d'),rows=FONT[ch].split(' ');
-    g.fillStyle='#000';g.fillRect(0,0,20,28);
-    for(var r=0;r<7;r++)for(var c=0;c<5;c++){
-      g.fillStyle=rows[r].charAt(c)==='1'?'#ff2a2a':'#4a0000';
-      g.fillRect(c*4,r*4,3,3);
+    var g=cv.getContext('2d');g.clearRect(0,0,cv.width,cv.height);
+    if(ch===':'){
+      g.shadowColor='#ff0033';g.shadowBlur=8;g.fillStyle='#ff3355';
+      g.fillRect(10,28,12,12);g.fillRect(10,62,12,12);return;
     }
+    'abcdefg'.split('').forEach(function(k){
+      var on=SEG[ch].indexOf(k)>=0;
+      g.beginPath();SHAPES[k](g);
+      if(on){g.shadowColor='#ff0033';g.shadowBlur=10;g.fillStyle='#ff3355'}
+      else{g.shadowBlur=0;g.fillStyle='#4d0a14'}
+      g.fill();
+    });
   }
-  function mk(){var cv=document.createElement('canvas');cv.width=20;cv.height=28;return cv}
+  function mk(colon){var cv=document.createElement('canvas');cv.width=colon?30:60;cv.height=100;return cv}
   function setDigits(id,str){
     var el=$(id);
     while(el.children.length<str.length)el.appendChild(mk());
@@ -274,7 +311,7 @@ footer b{color:var(--gold)}
       if(cv.getAttribute('data-c')!==str.charAt(i)){cv.setAttribute('data-c',str.charAt(i));glyph(cv,str.charAt(i))}
     }
   }
-  Array.prototype.forEach.call(document.querySelectorAll('.colon'),function(el){var cv=mk();glyph(cv,':');el.appendChild(cv)});
+  Array.prototype.forEach.call(document.querySelectorAll('.colon'),function(el){var cv=mk(true);glyph(cv,':');el.appendChild(cv)});
 
   var alarm=$('alarm');
   function tick(){
@@ -299,7 +336,9 @@ footer b{color:var(--gold)}
   tick();setInterval(tick,1000);
   // wiggle bells briefly each minute for fun
   setInterval(function(){if($('today').style.display==='block')return;alarm.classList.add('ring');setTimeout(function(){alarm.classList.remove('ring')},900)},60000);
-  alarm.addEventListener('click',function(){alarm.classList.add('ring');setTimeout(function(){if($('today').style.display!=='block')alarm.classList.remove('ring')},1200)});
+  var knobA=$('knobA'),on=false;
+  knobA.addEventListener('click',function(){on=!on;knobA.className='knob '+(on?'hi':'lo');alarm.classList.toggle('ring',on||$('today').style.display==='block')});
+  $('snooze').addEventListener('click',function(){alarm.classList.add('ring');setTimeout(function(){if(!on&&$('today').style.display!=='block')alarm.classList.remove('ring')},1200)});
 
   // snow
   var c=$('snow'),x=c.getContext('2d'),W,H,flakes=[];
