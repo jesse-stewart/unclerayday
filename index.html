@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Uncle Ray Day – Countdown to December 23</title>
+<meta name="description" content="Countdown to Uncle Ray Day, December 23 — A Great Day in Central PA.">
+<style>
+:root{
+  --green:#0a7d2c; --green-d:#04501b; --green-l:#3fe06f;
+  --red:#d3101f; --red-d:#7d0610; --red-l:#ff5a5f;
+  --gold:#ffd54a; --cream:#fff8e1; --ink:#07140b;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;background:#06431a}
+body{
+  font-family:"Trebuchet MS",Verdana,Tahoma,sans-serif;color:#fff;min-height:100vh;
+  background:
+    radial-gradient(ellipse at 50% -10%,#1fa04a 0,transparent 60%),
+    repeating-linear-gradient(45deg,#06431a 0 24px,#075a22 24px 48px);
+  overflow-x:hidden;
+}
+#snow{position:fixed;inset:0;pointer-events:none;z-index:50}
+
+/* ---------- intro preloader ---------- */
+#intro{position:fixed;inset:0;z-index:100;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;transition:opacity .6s,visibility .6s}
+#intro.gone{opacity:0;visibility:hidden}
+#intro h2{font:900 clamp(22px,6vw,44px) Impact,"Arial Black",sans-serif;letter-spacing:3px;color:var(--green-l);text-shadow:0 0 14px var(--green-l)}
+.loadbar{width:min(320px,70vw);height:22px;border:3px solid #fff;border-radius:12px;padding:2px;background:#111}
+.loadbar i{display:block;height:100%;width:0;border-radius:8px;background:linear-gradient(#ff7a7a,var(--red) 50%,#8e0a14 51%,#c4101e);animation:load 2.2s ease-in-out forwards}
+@keyframes load{to{width:100%}}
+#intro small{color:#9c9;font-size:13px}
+#intro a{color:var(--gold);cursor:pointer;text-decoration:underline;font-size:14px}
+
+/* ---------- nav ---------- */
+nav{position:sticky;top:0;z-index:40;display:flex;justify-content:center;gap:10px;padding:10px;background:linear-gradient(#111,#000);border-bottom:3px solid var(--gold)}
+.btn{
+  display:inline-block;text-decoration:none;color:#fff;font-weight:900;text-transform:uppercase;letter-spacing:1px;font-size:14px;
+  padding:9px 22px;border-radius:999px;border:2px solid #fff;
+  background:linear-gradient(#ff8a8a 0,var(--red) 48%,var(--red-d) 52%,#b30d1a 100%);
+  box-shadow:0 3px 0 #4d0309,0 6px 10px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.7);
+  text-shadow:0 1px 2px rgba(0,0,0,.6);transition:transform .1s,filter .2s;
+}
+.btn.g{background:linear-gradient(#8dffad 0,#17a845 48%,var(--green-d) 52%,#0b7a2c 100%);box-shadow:0 3px 0 #02290d,0 6px 10px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.7)}
+.btn:hover{filter:brightness(1.2);transform:translateY(-2px)}
+.btn:active{transform:translateY(2px)}
+
+main{max-width:980px;margin:0 auto;padding:0 16px 40px}
+section{padding:36px 0}
+
+/* ---------- hero ---------- */
+.title{
+  text-align:center;font:900 clamp(40px,11vw,104px)/0.95 Impact,"Arial Black",sans-serif;text-transform:uppercase;
+  background:linear-gradient(#fff 0,#ffe 40%,var(--gold) 50%,#e8a800 100%);-webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(3px 3px 0 var(--red-d)) drop-shadow(0 0 18px rgba(255,213,74,.5));
+  animation:pop 1s cubic-bezier(.2,1.6,.4,1) both;
+}
+.sub{text-align:center;font-size:clamp(16px,3.6vw,24px);font-weight:900;margin-top:12px;text-shadow:2px 2px 0 #000}
+.sub b{color:var(--gold)}
+.question{
+  margin:22px auto 0;max-width:640px;text-align:center;padding:12px 16px;border-radius:14px;
+  background:rgba(0,0,0,.45);border:2px dashed var(--gold);font-weight:700;font-size:clamp(15px,3.4vw,19px)
+}
+@keyframes pop{from{transform:scale(0) rotate(-8deg);opacity:0}to{transform:none;opacity:1}}
+
+/* ---------- alarm clock ---------- */
+.clockwrap{display:flex;justify-content:center;margin-top:34px;position:relative}
+.alarm{position:relative;width:min(560px,100%);padding-top:64px}
+.bell{position:absolute;top:6px;width:30%;height:96px;border-radius:100px 100px 12px 12px;z-index:1;
+  background:radial-gradient(ellipse at 35% 30%,#fff 0,var(--gold) 18%,#d49a00 60%,#7a5600 100%);
+  border:3px solid #6b4a00;box-shadow:0 4px 8px rgba(0,0,0,.5)}
+.bell.l{left:5%;transform-origin:100% 100%;transform:rotate(-24deg)}
+.bell.r{right:5%;transform-origin:0 100%;transform:rotate(24deg)}
+.alarm.ring .bell.l{animation:ringL .12s infinite alternate}
+.alarm.ring .bell.r{animation:ringR .12s infinite alternate}
+.alarm.ring .body{animation:shake .12s infinite alternate}
+@keyframes ringL{from{transform:rotate(-30deg)}to{transform:rotate(-18deg)}}
+@keyframes ringR{from{transform:rotate(30deg)}to{transform:rotate(18deg)}}
+@keyframes shake{from{transform:translateX(-3px) rotate(-.6deg)}to{transform:translateX(3px) rotate(.6deg)}}
+.hammer{position:absolute;top:0;left:50%;width:10px;height:70px;margin-left:-5px;background:linear-gradient(90deg,#999,#fff,#777);border-radius:5px;z-index:1}
+.hammer:before{content:"";position:absolute;top:-10px;left:50%;width:34px;height:20px;margin-left:-17px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#fff,#888 70%)}
+.alarm.ring .hammer{animation:ham .12s infinite alternate;transform-origin:50% 100%}
+@keyframes ham{from{transform:rotate(-28deg)}to{transform:rotate(28deg)}}
+.body{
+  position:relative;z-index:2;border-radius:46px;padding:20px 18px 26px;border:5px solid #5a050d;
+  background:
+    linear-gradient(180deg,rgba(255,255,255,.55) 0,rgba(255,255,255,0) 22%),
+    radial-gradient(ellipse at 50% 0,#ff6b6b 0,var(--red) 40%,var(--red-d) 100%);
+  box-shadow:0 14px 0 #3a0409,0 24px 30px rgba(0,0,0,.6),inset 0 -12px 22px rgba(0,0,0,.35);
+}
+.ringgreen{border-radius:34px;padding:12px;border:4px solid #02290d;
+  background:linear-gradient(#5dff8c,var(--green) 45%,var(--green-d));box-shadow:inset 0 3px 6px rgba(255,255,255,.5),inset 0 -5px 10px rgba(0,0,0,.5)}
+.screen{
+  border-radius:22px;padding:16px 10px 12px;border:4px solid #000;text-align:center;position:relative;overflow:hidden;
+  background:background:linear-gradient(#0b2a14,#020a05);
+  box-shadow:inset 0 0 22px #000;
+}
+.screen:after{content:"";position:absolute;left:0;right:0;top:0;height:46%;background:linear-gradient(rgba(255,255,255,.14),rgba(255,255,255,0));pointer-events:none}
+.label-top{font:700 clamp(10px,2.4vw,13px) "Courier New",monospace;letter-spacing:2px;color:var(--green-l);text-transform:uppercase;opacity:.9}
+.digits{display:flex;justify-content:center;align-items:flex-start;gap:clamp(4px,1.6vw,12px);margin:8px 0 2px}
+.unit{text-align:center;min-width:0}
+.num{
+  font:900 clamp(26px,8.2vw,58px)/1 "Courier New",monospace;color:#ff3b3b;letter-spacing:1px;
+  text-shadow:0 0 6px #ff0000,0 0 18px rgba(255,40,40,.8);font-variant-numeric:tabular-nums;
+}
+.cap{font:700 clamp(9px,2.3vw,13px) "Courier New",monospace;color:var(--green-l);letter-spacing:1px;text-transform:uppercase;margin-top:2px}
+.colon{font:900 clamp(22px,6.5vw,46px)/1.15 "Courier New",monospace;color:#ff3b3b;text-shadow:0 0 12px red;animation:blink 1s steps(2) infinite}
+@keyframes blink{50%{opacity:.15}}
+.goal{margin-top:10px;font:700 clamp(11px,2.9vw,16px) "Courier New",monospace;color:#ffe27a;text-shadow:0 0 8px #ffb300;letter-spacing:1px}
+.knobs{display:flex;justify-content:space-between;padding:0 12%;margin-top:14px}
+.knob{width:46px;height:20px;border-radius:10px;background:linear-gradient(var(--gold),#b88400);border:2px solid #5a4000;box-shadow:0 3px 0 #3a2800}
+.feet{display:flex;justify-content:space-between;padding:0 14%;position:relative;z-index:1;margin-top:-6px}
+.feet i{width:46px;height:34px;border-radius:0 0 30px 30px;background:linear-gradient(#ddd,#555);border:3px solid #222;transform-origin:top}
+.feet i:first-child{transform:rotate(14deg)}.feet i:last-child{transform:rotate(-14deg)}
+
+.today{display:none;font:900 clamp(24px,7vw,54px)/1.1 Impact,sans-serif;color:var(--gold);text-shadow:0 0 14px #ffb300;padding:18px 0;text-transform:uppercase;animation:blink .8s steps(2) infinite}
+
+/* ---------- timeline / road ---------- */
+h2.h{font:900 clamp(26px,6vw,44px) Impact,"Arial Black",sans-serif;text-transform:uppercase;text-align:center;letter-spacing:2px;text-shadow:3px 3px 0 var(--red-d);margin-bottom:6px}
+.h-sub{text-align:center;font-weight:700;margin-bottom:26px;color:#cfe}
+.road{position:relative;height:96px;margin:50px 6px 8px}
+.road .asphalt{position:absolute;left:0;right:0;bottom:6px;height:26px;border-radius:14px;background:#222;border:3px solid #000;
+  box-shadow:0 4px 0 #000;overflow:hidden}
+.road .asphalt:before{content:"";position:absolute;left:0;right:0;top:9px;height:4px;
+  background:repeating-linear-gradient(90deg,#fff 0 22px,transparent 22px 44px)}
+.road .done{position:absolute;left:0;bottom:6px;height:26px;border-radius:14px;background:linear-gradient(90deg,var(--green),var(--green-l));
+  border:3px solid #000;width:0;transition:width 1.4s cubic-bezier(.3,1,.4,1);z-index:1;opacity:.85}
+.car{position:absolute;bottom:20px;left:0;font-size:44px;z-index:3;transform:translateX(-50%);transition:left 1.4s cubic-bezier(.3,1,.4,1);
+  filter:drop-shadow(0 4px 2px rgba(0,0,0,.6));animation:bump .5s infinite alternate}
+@keyframes bump{from{margin-bottom:0}to{margin-bottom:3px}}
+.pa{position:absolute;right:-6px;bottom:30px;font-size:13px;font-weight:900;background:var(--gold);color:#000;border:3px solid #000;border-radius:8px;padding:4px 8px;z-index:4;text-transform:uppercase;box-shadow:3px 3px 0 #000}
+.start{position:absolute;left:-6px;bottom:30px;font-size:13px;font-weight:900;background:#fff;color:#000;border:3px solid #000;border-radius:8px;padding:4px 8px;z-index:4;text-transform:uppercase;box-shadow:3px 3px 0 #000}
+.pct{text-align:center;font:900 20px "Courier New",monospace;color:var(--gold);margin-bottom:28px;text-shadow:2px 2px 0 #000}
+
+.steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px}
+.step{
+  position:relative;padding:18px 14px 16px;border-radius:18px;background:linear-gradient(#fff 0,var(--cream) 100%);color:#222;border:4px solid #000;
+  box-shadow:5px 5px 0 #000;transition:transform .2s;
+}
+.step:nth-child(odd){transform:rotate(-1.5deg)}.step:nth-child(even){transform:rotate(1.5deg)}
+.step:hover{transform:rotate(0) scale(1.05);z-index:2}
+.step .when{display:inline-block;font:900 15px Impact,sans-serif;letter-spacing:1px;padding:3px 12px;border-radius:999px;color:#fff;border:2px solid #000;
+  background:linear-gradient(#ff7a7a,var(--red) 50%,var(--red-d) 52%,#b30d1a);margin-bottom:8px}
+.step:nth-child(even) .when{background:linear-gradient(#8dffad,#17a845 50%,var(--green-d) 52%,#0b7a2c)}
+.step h3{font-size:18px;margin-bottom:4px}
+.step p{font-size:14px;line-height:1.4}
+.step .ico{position:absolute;top:-18px;right:-10px;font-size:34px;filter:drop-shadow(2px 2px 0 #000)}
+
+/* ---------- about ---------- */
+.about{display:grid;grid-template-columns:minmax(0,5fr) minmax(0,6fr);gap:30px;align-items:center}
+.photo{
+  border:6px solid #fff;border-radius:6px;box-shadow:0 0 0 4px #000,10px 12px 0 rgba(0,0,0,.6);transform:rotate(-3deg);background:#00bf63;
+  transition:transform .3s;max-width:380px;margin:0 auto;
+}
+.photo:hover{transform:rotate(2deg) scale(1.03)}
+.photo img{display:block;width:100%;height:auto}
+.panel{
+  background:rgba(0,0,0,.55);border:4px solid #fff;border-radius:22px;padding:22px 24px;box-shadow:0 0 0 4px var(--red),0 10px 24px rgba(0,0,0,.5);
+  font-size:clamp(15px,2.6vw,18px);line-height:1.6;
+}
+.panel p+p{margin-top:14px}
+.panel .wwurd{font:900 clamp(22px,5vw,32px)/1.15 Impact,sans-serif;color:var(--gold);text-transform:uppercase;text-shadow:2px 2px 0 #000;letter-spacing:1px}
+
+footer{text-align:center;padding:26px 16px 40px;font-size:13px;color:#bdd;border-top:3px solid var(--gold);background:#000}
+footer b{color:var(--gold)}
+.ticker{background:var(--red);border-bottom:3px solid #000;overflow:hidden;white-space:nowrap;font:900 14px "Courier New",monospace;padding:6px 0;text-transform:uppercase;letter-spacing:2px}
+.ticker span{display:inline-block;padding-left:100%;animation:tick 28s linear infinite}
+@keyframes tick{to{transform:translateX(-100%)}}
+
+@media(max-width:720px){
+  .about{grid-template-columns:1fr}
+  .btn{padding:8px 14px;font-size:12px}
+  .bell{height:76px}.alarm{padding-top:50px}
+  .step:nth-child(n){transform:none}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<div id="intro">
+  <h2>Loading Uncle Ray…</h2>
+  <div class="loadbar"><i></i></div>
+  <small>Warming up the alarm clock</small>
+  <a id="skip">skip intro &raquo;</a>
+</div>
+
+<canvas id="snow"></canvas>
+
+<div class="ticker"><span>★ December 23 ★ Uncle Ray Day ★ A Great Day in Central PA ★ What would Uncle Ray do? ★ December 23 ★ Uncle Ray Day ★ A Great Day in Central PA ★ What would Uncle Ray do? ★</span></div>
+
+<nav>
+  <a class="btn" href="#top">Countdown</a>
+  <a class="btn g" href="#road">Road Trip</a>
+  <a class="btn" href="#about">About</a>
+</nav>
+
+<main id="top">
+  <section>
+    <h1 class="title">Uncle Ray Day</h1>
+    <p class="sub">Countdown to <b>December 23</b> &mdash; A Great Day in Central PA</p>
+
+    <div class="clockwrap">
+      <div class="alarm" id="alarm" role="timer" aria-live="off">
+        <div class="bell l"></div><div class="bell r"></div><div class="hammer"></div>
+        <div class="body">
+          <div class="ringgreen">
+            <div class="screen">
+              <div class="label-top">&#9200; Time until Uncle Ray Day</div>
+              <div class="digits" id="digits">
+                <div class="unit"><div class="num" id="d">000</div><div class="cap">Days</div></div>
+                <div class="colon">:</div>
+                <div class="unit"><div class="num" id="h">00</div><div class="cap">Hours</div></div>
+                <div class="colon">:</div>
+                <div class="unit"><div class="num" id="m">00</div><div class="cap">Mins</div></div>
+                <div class="colon">:</div>
+                <div class="unit"><div class="num" id="s">00</div><div class="cap">Secs</div></div>
+              </div>
+              <div class="today" id="today">It's Uncle Ray Day!</div>
+              <div class="goal" id="goal">&#9658; Alarm set: Dec 23</div>
+            </div>
+          </div>
+          <div class="knobs"><div class="knob"></div><div class="knob"></div></div>
+        </div>
+        <div class="feet"><i></i><i></i></div>
+      </div>
+    </div>
+
+    <p class="question">&#127876; On December 23rd, ask yourself: <b>What Would Uncle Ray Do?</b></p>
+  </section>
+
+  <section id="road">
+    <h2 class="h">The Road to Dec 23</h2>
+    <p class="h-sub">Uncle Ray is on his way. Follow the journey!</p>
+    <div class="road" aria-hidden="true">
+      <div class="start" id="startLbl">Dec 23</div>
+      <div class="pa">Dec 23 &#127876;</div>
+      <div class="asphalt"></div>
+      <div class="done" id="done"></div>
+      <div class="car" id="car">&#128663;</div>
+    </div>
+    <p class="pct" id="pct">0% there</p>
+
+    <div class="steps">
+      <div class="step"><span class="ico">&#10052;&#65039;</span><span class="when">Dec 23, 2021</span><h3>The Original Great Day</h3><p>Ray Kauffman braves winter weather and holiday traffic to pick up a friend in need.</p></div>
+      <div class="step"><span class="ico">&#127867;</span><span class="when">That Evening</span><h3>Camaraderie &amp; Fellowship</h3><p>One act of kindness turns into an evening shared with friends.</p></div>
+      <div class="step"><span class="ico">&#127881;</span><span class="when">Every Dec 23</span><h3>An Unofficial Holiday</h3><p>A single act of kindness starts a movement: A Great Day in Central PA.</p></div>
+      <div class="step"><span class="ico">&#10067;</span><span class="when" id="nextWhen">Dec 23</span><h3>What Would Uncle Ray Do?</h3><p id="nextTxt">The next one is coming up. Be kind. Give someone a ride.</p></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <h2 class="h">About Uncle Ray Day</h2>
+    <p class="h-sub">An unofficial holiday</p>
+    <div class="about">
+      <div class="photo"><img src="uncle-ray.png" alt="Illustration of Uncle Ray in a striped beanie, with the text Uncle Ray Day, Dec 23, A Great Day in Central PA" width="1500" height="2000"></div>
+      <div class="panel">
+        <p>Each December 23, we celebrate A Great Day in Central PA with Uncle Ray. This unofficial holiday commemorates how a single act of kindness can start a movement.</p>
+        <p>On December 23, 2021, Ray Kauffman braved winter weather and holiday traffic to pick up a friend in need and share an evening of camaraderie and fellowship.</p>
+        <p>This December 23rd, ask yourself this simple question:</p>
+        <p class="wwurd">What Would Uncle Ray Do?</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>&copy; <b>Uncle Ray Day</b> &middot; December 23 &middot; A Great Day in Central PA<br>Best viewed in Netscape Navigator at 800&times;600 (just kidding).</footer>
+
+<script>
+(function(){
+  var $=function(i){return document.getElementById(i)};
+  var pad=function(n,l){n=String(n);while(n.length<l)n='0'+n;return n};
+
+  // intro
+  var intro=$('intro');
+  function hide(){intro.classList.add('gone');setTimeout(function(){intro.style.display='none'},700)}
+  setTimeout(hide,2400);$('skip').onclick=hide;
+
+  // Target = the next Dec 23 (local time). Window of Dec 23 itself = celebration.
+  function targets(now){
+    var y=now.getFullYear();
+    var start=new Date(y,11,23), end=new Date(y,11,24);
+    if(now>=end){y++;start=new Date(y,11,23);end=new Date(y,11,24)}
+    var prev=new Date(y-1,11,24); // road starts after last Dec 23 ends
+    return {y:y,start:start,end:end,prev:prev};
+  }
+  var alarm=$('alarm');
+  function tick(){
+    var now=new Date(), t=targets(now), diff=t.start-now;
+    var months=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    $('goal').textContent='► Alarm set: Dec 23, '+t.y;
+    $('nextWhen').textContent='Dec 23, '+t.y;
+    if(diff<=0){ // it's the day!
+      $('digits').style.display='none';$('today').style.display='block';
+      $('goal').textContent='★ A Great Day in Central PA ★';
+      alarm.classList.add('ring');
+      $('nextTxt').textContent="It's here! Go be kind. Give someone a ride.";
+      progress(1);return;
+    }
+    $('digits').style.display='flex';$('today').style.display='none';
+    var s=Math.floor(diff/1000);
+    var d=Math.floor(s/86400);s-=d*86400;
+    var h=Math.floor(s/3600);s-=h*3600;
+    var m=Math.floor(s/60);s-=m*60;
+    $('d').textContent=pad(d,3);$('h').textContent=pad(h,2);$('m').textContent=pad(m,2);$('s').textContent=pad(s,2);
+    progress((now-t.prev)/(t.start-t.prev));
+  }
+  var shown=false;
+  function progress(p){
+    p=Math.max(0,Math.min(1,p));
+    var pc=(p*100);
+    $('car').style.left=(shown?pc:0)+'%';$('done').style.width=(shown?pc:0)+'%';
+    $('pct').textContent=Math.floor(pc)+'% of the way to Uncle Ray Day';
+    window._p=pc;
+  }
+  tick();setInterval(tick,1000);
+  // animate the car once road scrolls into view
+  var road=$('road');
+  function reveal(){
+    if(shown)return;
+    var r=road.getBoundingClientRect();
+    if(r.top<innerHeight*.85){shown=true;tick()}
+  }
+  addEventListener('scroll',reveal,{passive:true});setTimeout(reveal,300);
+  // wiggle bells briefly each minute for fun
+  setInterval(function(){if($('today').style.display==='block')return;alarm.classList.add('ring');setTimeout(function(){alarm.classList.remove('ring')},900)},60000);
+  alarm.addEventListener('click',function(){alarm.classList.add('ring');setTimeout(function(){if($('today').style.display!=='block')alarm.classList.remove('ring')},1200)});
+
+  // snow
+  var c=$('snow'),x=c.getContext('2d'),W,H,flakes=[];
+  function size(){W=c.width=innerWidth;H=c.height=innerHeight}
+  size();addEventListener('resize',size);
+  var n=Math.min(90,Math.floor(innerWidth/14));
+  for(var i=0;i<n;i++)flakes.push({x:Math.random()*W,y:Math.random()*H,r:Math.random()*3+1,v:Math.random()*1+.5,o:Math.random()*Math.PI*2});
+  if(!matchMedia('(prefers-reduced-motion:reduce)').matches)(function f(){
+    x.clearRect(0,0,W,H);x.fillStyle='rgba(255,255,255,.85)';
+    flakes.forEach(function(k){
+      k.y+=k.v;k.o+=.02;k.x+=Math.sin(k.o)*.6;
+      if(k.y>H){k.y=-5;k.x=Math.random()*W}
+      x.beginPath();x.arc(k.x,k.y,k.r,0,7);x.fill();
+    });
+    requestAnimationFrame(f);
+  })();
+})();
+</script>
+</body>
+</html>
